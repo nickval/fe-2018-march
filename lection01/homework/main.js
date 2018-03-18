@@ -1,6 +1,9 @@
-radius = prompt('Input cylinder radius', '');
-height = prompt('Input cylinder height', '');
-
+do {
+    var radius = prompt('Input cylinder radius', '');
+}while((radius < 1 || radius == null));
+do {
+    var height = prompt('Input cylinder height', '');
+}while((height < 1 || height == null));
 square = Math.PI*Math.pow(radius,2);
 
 document.write('<p>**************</p>');
