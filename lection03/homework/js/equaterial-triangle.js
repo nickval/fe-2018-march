@@ -1,8 +1,8 @@
 var h;
 
 do{
-    h = +prompt('Input h (it should be odd number):',);
-}while(!(!isNaN(h) && h >= 0 && h && h%2 != 0));
+    h = +prompt('Input h (it should be an odd number):',);
+}while(isNaN(h) || h <= 0 || h%2 == 0);
 
 var star = '*';
 var space = '&nbsp';

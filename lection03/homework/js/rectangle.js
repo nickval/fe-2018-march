@@ -2,11 +2,11 @@ var a, b;
 
 do{
     a = +prompt('Input a:',);
-}while(!(!isNaN(a) && a >= 0 && a));
+}while(isNaN(a) || a <= 0);
 
 do{
     b = +prompt('Input b:',);
-}while(!(!isNaN(b) && b >= 0 && b));
+}while(isNaN(b) || b <= 0);
 
 var star = '*';
 var space = '&nbsp';
