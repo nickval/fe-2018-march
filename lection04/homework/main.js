@@ -54,18 +54,18 @@ console.log('max = ' + max + ' (pos: ' + posMax + '); min = ' + min + ' (pos: ' 
 
 //Task 2. Элементы массива между min -- max записать в массив B. Массив взять из 1го задания
 
-var C = [];
+B.length = 0;
 if (posMin < posMax) {
     for (let i = posMin; i <= posMax; i++) {
-        C[C.length] = A[i];
+        B[B.length] = A[i];
     }
 } else {
     for (let i = posMax; i <= posMin; i++) {
-        C[C.length] = A[i];
+        B[B.length] = A[i];
     }
 }
 
-console.log('Array between min and max: ', C);
+console.log('Array between min and max: ', B);
 
 //Task 3. В массиве A поменять местами min и max. Массив взять из 2го задания
 
