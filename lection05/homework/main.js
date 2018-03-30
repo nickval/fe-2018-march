@@ -63,5 +63,8 @@ console.log('maxRowPos: ', maxRowPos);
 var bufferArr = A[minRowPos].slice();
 A[minRowPos] = A[maxRowPos].slice();
 A[maxRowPos] = bufferArr.slice();
-console.log(A);
+document.write('<br /><br /> Swithing min row: ' + minRowPos + ' with max row: ' + maxRowPos + '<br />');
+for (let i = 0; i < A.length; i++) {
+    document.write('<br />' + A[i]);
+}
 
