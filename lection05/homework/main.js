@@ -1,70 +1,78 @@
-var n = 19;
-var A = new Array(n);
+var A = [],
+    buffer = [],
+    bufferArr = [],
+    m = 6,
+    maxRowPos = 0,
+    maxRowSum = 0,
+    minRowPos = 0,
+    minRowSum = 0,
+    n = 19,
+    rowSum = 0;
 
-for (let i = 0; i < A.length; i++) {
+
+for (let i = 0; i < A.length; i += 1) {
     A[i] = Math.floor(Math.random() * 99);
 }
 document.write(A);
 
-// Task 1. В одномерном массиве произвести такую замену: 
-//         1 элемент поменять с 2 3 элемент поменять с 4 5 элемент поменять с 6 и тд 
-//         Если массив непарный - последний элемент не трогать.
+/*
+ * Task 1. В одномерном массиве произвести такую замену:
+ *       1 элемент поменять с 2 3 элемент поменять с 4 5 элемент поменять
+ *       с 6 и тд. Если массив непарный - последний элемент не трогать.
+ */
 
-var buffer;
 for (let i = 1; i < A.length; i += 2) {
     buffer = A[i - 1];
     A[i - 1] = A[i];
     A[i] = buffer;
 }
-document.write('<br />' + A);
+document.write(`<br /> ${A}`);
 
-// Task 2. В двумерном массиве A размером n на m. Заполнить случайными числами.
-//         Найти ряд, где сумма элементов наименьшая
-//         Найти ряд, где сумма элементов найбольшая
-
+/*
+ * Task 2. В двумерном массиве A размером n на m. Заполнить случайными числами.
+ * Найти ряд, где сумма элементов наименьшая
+ * Найти ряд, где сумма элементов найбольшая
+ */
 n = 5;
-var m = 6;
-var A = new Array(n);
-var rowSumm = 0;
-var minRowSumm, maxRowSumm, minRowPos, maxRowPos;
+A = new Array(n);
 
-document.write('<br />');
+document.write("<br />");
 
-for (let i = 0; i < A.length; i++) {
+for (let i = 0; i < A.length; i += 1) {
     A[i] = new Array(m);
-    for (let j = 0; j < A[i].length; j++) {
+    for (let j = 0; j < A[i].length; j += 1) {
         A[i][j] = Math.floor(Math.random() * 99);
-        rowSumm += A[i][j];
+        rowSum += A[i][j];
     }
-    console.log('Summ: ' + rowSumm + ' pos: ' + i);
-    document.write('<br />' + A[i]);
-    if (i == 0) {
-        minRowSumm = rowSumm;
-        maxRowSumm = rowSumm;
+    console.log(`Sum: ${rowSum} pos: ${i}`);
+    document.write(`<br /> ${A[i]}`);
+    if (i === 0) {
+        minRowSum = rowSum;
+        maxRowSum = rowSum;
         minRowPos = 0;
         maxRowPos = 0;
     } else {
-        if (minRowSumm > rowSumm) {
-            minRowSumm = rowSumm;
+        if (minRowSum > rowSum) {
+            minRowSum = rowSum;
             minRowPos = i;
         }
-        if (maxRowSumm < rowSumm) {
-            maxRowSumm = rowSumm;
+        if (maxRowSum < rowSum) {
+            maxRowSum = rowSum;
             maxRowPos = i;
         }
     }
-    rowSumm = 0;
+    rowSum = 0;
 }
-console.log('minRowPos: ', minRowPos);
-console.log('maxRowPos: ', maxRowPos);
+console.log(`minRowPos: ${minRowPos}`);
+console.log(`maxRowPos: ${maxRowPos}`);
 
 // Поменять ряды местами (1 и 2 пункт)
 
-var bufferArr = A[minRowPos].slice();
+bufferArr = A[minRowPos].slice();
 A[minRowPos] = A[maxRowPos].slice();
 A[maxRowPos] = bufferArr.slice();
-document.write('<br /><br /> Swithing min row: ' + minRowPos + ' with max row: ' + maxRowPos + '<br />');
-for (let i = 0; i < A.length; i++) {
-    document.write('<br />' + A[i]);
+document.write(`<br /><br /> Switching min row: ${minRowPos} 
+                with max row: ${maxRowPos}<br />`);
+for (let i = 0; i < A.length; i += 1) {
+    document.write(`<br /> ${A[i]}`);
 }
-
