@@ -18,7 +18,7 @@ for (var i = 1; i < h; i++){
             }
         // }
         } else {
-            if ((j == i - mid + 1) || (j == h - (i - mid + 1))) {
+            if ((j == mid + i + 1 - h) || (j == mid - i - 1 + h)) {
                 document.write(star);
             } else {
                 document.write(space);
