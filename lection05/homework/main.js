@@ -1,5 +1,5 @@
 var A = [],
-    buffer = [],
+    buffer = 0,
     bufferArr = [],
     m = 6,
     maxRowPos = 0,
@@ -10,10 +10,10 @@ var A = [],
     rowSum = 0;
 
 
-for (let i = 0; i < A.length; i += 1) {
+for (let i = 0; i < n; i += 1) {
     A[i] = Math.floor(Math.random() * 99);
 }
-document.write(A);
+document.write(`${A}`);
 
 /*
  * Task 1. В одномерном массиве произвести такую замену:
@@ -26,7 +26,7 @@ for (let i = 1; i < A.length; i += 2) {
     A[i - 1] = A[i];
     A[i] = buffer;
 }
-document.write(`<br /> ${A}`);
+document.write(`<br />${A}`);
 
 /*
  * Task 2. В двумерном массиве A размером n на m. Заполнить случайными числами.
@@ -68,9 +68,9 @@ console.log(`maxRowPos: ${maxRowPos}`);
 
 // Поменять ряды местами (1 и 2 пункт)
 
-bufferArr = A[minRowPos].slice();
-A[minRowPos] = A[maxRowPos].slice();
-A[maxRowPos] = bufferArr.slice();
+bufferArr = A[minRowPos];
+A[minRowPos] = A[maxRowPos];
+A[maxRowPos] = bufferArr;
 document.write(`<br /><br /> Switching min row: ${minRowPos} 
                 with max row: ${maxRowPos}<br />`);
 for (let i = 0; i < A.length; i += 1) {
