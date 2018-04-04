@@ -44,7 +44,7 @@ function compareArr(arr1, arr2) {
 
         for (let i = 0; i < arrNumb.length; i += 1) {
             sum += isNaN(arrNumb[i]) ||
-                typeof arrNumb[i] !== "number"
+                   typeof arrNumb[i] !== "number"
                 ? 0
                 : arrNumb[i];
         }
