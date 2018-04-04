@@ -6,13 +6,15 @@ var A = [],
 // Написать функцию заполнения двумерного массива. Имя произвольное.
 
 function fillArray(n) {
-    let arr = [];
+    const arr = [];
+
     for (let i = 0; i < n; i += 1) {
         arr[i] = [];
         for (let j = 0; j < n; j += 1) {
             arr[i][j] = Math.floor(Math.random() * 100);
         }
     }
+
     return arr;
 }
 
@@ -24,8 +26,9 @@ A = fillArray(n);
 
 console.log(A);
 
-/* 
- * написать функцию, которая примет как аргумент(параметр) два массива и сравнить суммы всех ЧИСЛОВЫХ элементов.
+/*
+ * Написать функцию, которая примет как аргумент(параметр) два массива
+ * и сравнить суммы всех ЧИСЛОВЫХ элементов.
  * Тот массив, сумма которого большая - должен вернутся функцией.
  */
 
@@ -38,9 +41,14 @@ function compareArr(arr1, arr2) {
 
     function sumNumbers(arrNumb) {
         let sum = 0;
+
         for (let i = 0; i < arrNumb.length; i += 1) {
-            sum += isNaN(arrNumb[i]) || typeof arrNumb[i] !== "number" ? 0 : arrNumb[i];
+            sum += isNaN(arrNumb[i]) ||
+                typeof arrNumb[i] !== "number"
+                ? 0
+                : arrNumb[i];
         }
+
         return sum;
     }
 
@@ -52,9 +60,11 @@ function compareArr(arr1, arr2) {
 
     if (sum1 >= sum2) {
         console.log(sum1);
+
         return arr1;
     } else {
         console.log(sum2);
+
         return arr2;
     }
 }
