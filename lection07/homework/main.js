@@ -48,22 +48,25 @@ function getMidElements() {
 console.log(getMidElements(A, B));
 
 /*
- * Написать функцию, которая получает 3 аргумента: два числа и функцию. 
- * Произвести вызов переданной функции с двумя аргументами числами. doFunction(2, 3, power); 
+ * Написать функцию, которая получает 3 аргумента: два числа и функцию.
+ * Произвести вызов переданной функции с двумя аргументами числами.
+ * doFunction(2, 3, power);
  * в ответе должны получить 8, как 2 в степени 3.
  */
 
 function doFunction() {
-    if (arguments.length === 2 &&
-        typeof arguments[0] === 'number' &&
-        arguments[1].name === 'factorial') {
+    let arg = arguments;
 
-        return factorial(arguments[0]);
-    } else if (arguments.length === 3 &&
-               !isNaN(arguments[0]) &&
-               !isNaN(arguments[1])) {
+    if (arg.length === 2 &&
+        typeof arg[0] === 'number' &&
+        arg[1].name === 'factorial') {
 
-        return arguments[2](arguments[0], arguments[1]);
+        return factorial(arg[0]);
+    } else if (arg.length === 3 &&
+               !isNaN(arg[0]) &&
+               !isNaN(arg[1])) {
+
+        return arg[2](arg[0], arg[1]);
     } else {
 
         return null;
