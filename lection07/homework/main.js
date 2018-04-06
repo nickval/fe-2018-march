@@ -3,8 +3,10 @@ var A = [1, 2, 3, 4, 5],
 
 /*
  *   Функция должна вернуть массив из центральных элементов переданных массивов.
- *   Центральный элемент, это один центральный, если массив по длине непарный [1, 2, 3, 4, 5] -> 3   
- *   Центральный элемент, это пара центральных, если массив по длине парный: [1, 2, 3, 4, 5, 6] -> 3, 4
+ *   Центральный элемент, это один центральный, если массив по длине непарный
+ *   [1, 2, 3, 4, 5] -> 3
+ *   Центральный элемент, это пара центральных, если массив по длине парный:
+ *   [1, 2, 3, 4, 5, 6] -> 3, 4
  */
 
 function getMidElement() {
@@ -14,9 +16,9 @@ function getMidElement() {
 
     if (arg && arg.length === 1) {
         midArray = arg[0].length / 2;
-        mid = arg[0].length % 2 === 0 ?
-            arg[0].slice((midArray) - 1, midArray + 1) :
-            arg[0].slice(Math.floor(midArray), Math.floor(midArray) + 1);
+        mid = arg[0].length % 2 === 0
+            ? arg[0].slice(midArray - 1, midArray + 1)
+            : arg[0].slice(Math.floor(midArray), Math.floor(midArray) + 1);
 
         return mid;
     } else {
