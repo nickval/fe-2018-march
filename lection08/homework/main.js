@@ -31,6 +31,8 @@ console.log(inArray('hello', ['svnj', 'hello', 'cvpoq']));
 let obj3 = {};
 
 function assignObjects(obj1, obj2, flag) {
+    flag = flag === true;
+    console.log(`flag: ${flag}`);
     if (obj1 != null && obj2 != null) {
         for (let key in obj1) {
             obj3[key] = obj1[key];
