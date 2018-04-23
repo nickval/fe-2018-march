@@ -64,3 +64,33 @@ console.log(obj.result);
 obj.doFunction(4, 5, mul).copy('kyky').copy('yep');
 console.log(obj.result);
 
+// Дана строка вида 'var_text_hello'. Сделайте из него текст 'varTextHello'.
+
+let str = 'var_text_hello',
+    // firstLetter = '',
+    res = [],
+    resStr = '';    
+
+res = str.split('_');
+for (let i = 0; i < res.length; i++) {
+    if (i > 0) {
+        resStr += res[i].slice(0 , 1).toUpperCase() + res[i].slice(1, res[i].length); 
+    } else {
+        resStr = res[i];
+    }
+}
+
+console.log(resStr);
+
+/* Сделайте функцию inArray, которая определяет, есть в массиве элемент с заданным текстом или нет. 
+ * Функция первым параметром должна принимать текст элемента, а вторым - массив, в котором делается поиск. 
+ * Функция должна возвращать true или false.
+ * inArray('foo', ['sjhfnaof', 'affooasf', 'dfhdfhdfh']) должно вернуть true, т.к. в affooasf есть совпадение.
+ */
+
+function inArray(textEl, arr) {
+    let boolRes = false;
+    
+
+    return boolRes
+}
