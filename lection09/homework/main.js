@@ -90,7 +90,13 @@ console.log(resStr);
 
 function inArray(textEl, arr) {
     let boolRes = false;
-    
+    for (let item in arr) {
+        if (arr[item].search(textEl) != -1) {
+            boolRes = true;
+        }      
+    }
 
     return boolRes
 }
+
+console.log(inArray('foo', ['sjhfnaof', 'affooasf', 'dfhdfhdfh']));
