@@ -10,7 +10,7 @@ window.onload = function () {
         widthBlock = +styleGet.getPropertyValue('width').split("px")[0];
         heightBlock = +styleGet.getPropertyValue('height').split("px")[0];
         speedAnim = +styleGet.getPropertyValue('transition-duration').split("s")[0] * 1000,
-        seatBlock = this.document.querySelector(".seatSquare"),
+        seatBlock = this.document.querySelector(".seatSquare");
 
     window.addEventListener("keydown", function (event) {
         if (!isMove) {
