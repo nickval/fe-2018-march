@@ -2,24 +2,24 @@ window.onload = function () {
     var block = document.querySelector(".square"),
         h = 200,
         step = 50,
-        isMove = false,
-        isSeat = false,
-        styleGet = window.getComputedStyle(block),
-        topPos = +styleGet.getPropertyValue('top').split("px")[0],
-        leftPos = +styleGet.getPropertyValue('left').split("px")[0],
-        widthBlock = +styleGet.getPropertyValue('width').split("px")[0],
-        heightBlock = +styleGet.getPropertyValue('height').split("px")[0],
-        speedAnim = +styleGet.getPropertyValue('transition-duration').split("s")[0] * 1000,
+        movingFlag = false,
+        seatingFlag = false,
+        getStyle = window.getComputedStyle(block),
+        topPosition = +getStyle.getPropertyValue('top').split("px")[0],
+        leftPosition = +getStyle.getPropertyValue('left').split("px")[0],
+        widthBlock = +getStyle.getPropertyValue('width').split("px")[0],
+        heightBlock = +getStyle.getPropertyValue('height').split("px")[0],
+        animationSpeed = +getStyle.getPropertyValue('transition-duration').split("s")[0] * 1000,
         seatBlock = document.querySelector(".seatSquare");
 
     window.addEventListener("keydown", function (event) {
-        if (!isMove) {
-            isMove = true;
+        if (!movingFlag) {
+            movingFlag = true;
             console.log(event);
             calcMove(event);
         }
-        if (!isSeat && event.ctrlKey) {
-            isSeat = true;
+        if (!seatingFlag && event.ctrlKey) {
+            seatingFlag = true;
             seat(event);
         }
     });
@@ -27,66 +27,66 @@ window.onload = function () {
     window.addEventListener("keyup", function (event) {
 
         if (!event.ctrlKey) {
-            isSeat = false;
+            seatingFlag = false;
             console.log('up', event);
             standUp(event);
         }
     })
 
     function calcMove(event) {
-        if (event.keyCode == 32 && !isSeat) {
+        if (event.keyCode == 32 && !seatingFlag) {
             jump();
         } else if (event.keyCode == 39) {
-            leftPos += step;
+            leftPosition += step;
         } else if (event.keyCode == 37) {
-            leftPos -= step;
-        } else if (event.keyCode === 38 && !isSeat) {
-            topPos -= step;
-        } else if (event.keyCode === 40 && !isSeat) {
-            topPos += step;
+            leftPosition -= step;
+        } else if (event.keyCode === 38 && !seatingFlag) {
+            topPosition -= step;
+        } else if (event.keyCode === 40 && !seatingFlag) {
+            topPosition += step;
         } else {
-            isMove = false;
+            movingFlag = false;
         }
 
-        if (event.keyCode !== 32) {
+        if (event.keyCode !== 32 && movingFlag) {
             move();
         }
     }
 
     function move(event) {
-        seatBlock.style.left = block.style.left = leftPos + "px";
-        seatBlock.style.top = block.style.top = topPos + "px";
+        seatBlock.style.left = block.style.left = leftPosition + "px";
+        seatBlock.style.top = block.style.top = topPosition + "px";
         isMoveChange();
     }
 
     function jump() {
-        topPos -= h;
-        block.style.top = topPos + "px";
+        topPosition -= h;
+        block.style.top = topPosition + "px";
         setTimeout(function () {
             // console.log("back " + block);
-            topPos += h;
-            block.style.top = topPos + "px";
+            topPosition += h;
+            block.style.top = topPosition + "px";
             isMoveChange();
-        }, speedAnim);
+        }, animationSpeed);
     }
 
     function isMoveChange() {
         setTimeout(function () {
-            isMove = false;
-        }, speedAnim);
+            movingFlag = false;
+        }, animationSpeed);
     }
 
     function seat() {
-        seatBlock.style.top = topPos;
-        seatBlock.style.left = leftPos;
+        seatBlock.style.top = topPosition;
+        seatBlock.style.left = leftPosition;
         seatBlock.style.height = heightBlock * 0.6 + "px";
         seatBlock.style.width = widthBlock * 1.15 + "px";
         block.style.width = widthBlock * 1.15 + "px";
     }
 
     function standUp() {
-        seatBlock.style.top = topPos;
-        seatBlock.style.left = leftPos;
+        seatBlock.style.top = topPosition;
+        seatBlock.style.left = leftPosition;
         seatBlock.style.height = 0 + "px";
         seatBlock.style.width = widthBlock + "px";
         block.style.width = widthBlock + "px";
