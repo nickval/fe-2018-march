@@ -2,21 +2,21 @@ window.onload = function () {
     var block = document.querySelector(".square"),
         h = 200,
         step = 50,
-        isMove = false;
-        isSeat = false;
+        isMove = false,
+        isSeat = false,
         styleGet = window.getComputedStyle(block),
         topPos = +styleGet.getPropertyValue('top').split("px")[0],
-        leftPos = +styleGet.getPropertyValue('left').split("px")[0];
-        widthBlock = +styleGet.getPropertyValue('width').split("px")[0];
-        heightBlock = +styleGet.getPropertyValue('height').split("px")[0];
+        leftPos = +styleGet.getPropertyValue('left').split("px")[0],
+        widthBlock = +styleGet.getPropertyValue('width').split("px")[0],
+        heightBlock = +styleGet.getPropertyValue('height').split("px")[0],
         speedAnim = +styleGet.getPropertyValue('transition-duration').split("s")[0] * 1000,
-        seatBlock = this.document.querySelector(".seatSquare");
+        seatBlock = document.querySelector(".seatSquare");
 
     window.addEventListener("keydown", function (event) {
         if (!isMove) {
             isMove = true;
             console.log(event);
-            move(event);
+            calcMove(event);
         }
         if (!isSeat && event.ctrlKey) {
             isSeat = true;
@@ -33,22 +33,15 @@ window.onload = function () {
         }
     })
 
-    function move(event) {
+    function calcMove(event) {
         if (event.keyCode == 32 && !isSeat) {
-            topPos -= h;
-            block.style.top = topPos + "px";
-            setTimeout(function () {
-                // console.log("back " + block);
-                topPos += h;
-                block.style.top = topPos + "px";
-                isMoveChange();
-            }, speedAnim);
+            jump();
         } else if (event.keyCode == 39) {
-            leftPos += step;        
+            leftPos += step;
         } else if (event.keyCode == 37) {
             leftPos -= step;
         } else if (event.keyCode === 38 && !isSeat) {
-            topPos -= step;       
+            topPos -= step;
         } else if (event.keyCode === 40 && !isSeat) {
             topPos += step;
         } else {
@@ -56,14 +49,29 @@ window.onload = function () {
         }
 
         if (event.keyCode !== 32) {
-            seatBlock.style.left = block.style.left = leftPos + "px";
-            seatBlock.style.top  = block.style.top = topPos + "px";
-            isMoveChange();
+            move();
         }
     }
 
+    function move(event) {
+        seatBlock.style.left = block.style.left = leftPos + "px";
+        seatBlock.style.top = block.style.top = topPos + "px";
+        isMoveChange();
+    }
+
+    function jump() {
+        topPos -= h;
+        block.style.top = topPos + "px";
+        setTimeout(function () {
+            // console.log("back " + block);
+            topPos += h;
+            block.style.top = topPos + "px";
+            isMoveChange();
+        }, speedAnim);
+    }
+
     function isMoveChange() {
-        setTimeout(function() {
+        setTimeout(function () {
             isMove = false;
         }, speedAnim);
     }
