@@ -11,22 +11,11 @@ window.onload = function () {
         heightBlock = +styleGet.getPropertyValue('height').split("px")[0];
         speedAnim = +styleGet.getPropertyValue('transition-duration').split("s")[0] * 1000,
         seatBlock = this.document.querySelector(".seatSquare"),
-        // styleSetGet = window.getComputedStyle(block),
-        // topSeatPos = +styleSetGet.getPropertyValue('top').split("px")[0],
-        // leftSeatPos = +styleSetGet.getPropertyValue('left').split("px")[0];
-        // widthSeatBlock = +styleSetGet.getPropertyValue('width').split("px")[0];
-
-    // console.log(heightBlock);
-    // styleGet = window.getComputedStyle(block);
-
-    // block.style.top = styleGet.getPropertyValue('top');
 
     window.addEventListener("keydown", function (event) {
-        // block.addEventListener("keydown", move(event));
         if (!isMove) {
             isMove = true;
             console.log(event);
-            // console.log("top " + styleGet);
             move(event);
         }
         if (!isSeat && event.ctrlKey) {
@@ -45,9 +34,6 @@ window.onload = function () {
     })
 
     function move(event) {
-        console.log(event);
-        // console.log(block.style.top);
-
         if (event.keyCode == 32 && !isSeat) {
             topPos -= h;
             block.style.top = topPos + "px";
@@ -58,23 +44,22 @@ window.onload = function () {
                 isMoveChange();
             }, speedAnim);
         } else if (event.keyCode == 39) {
-            leftPos += step;
-            block.style.left =  leftPos + "px";
-            seatBlock.style.left = leftPos + "px";            
+            leftPos += step;        
         } else if (event.keyCode == 37) {
-            leftPos -= step
-            block.style.left = leftPos + "px";
-            seatBlock.style.top = leftPos + "px";
+            leftPos -= step;
         } else if (event.keyCode === 38 && !isSeat) {
-            topPos -= step;
-            block.style.top = topPos + "px";           
+            topPos -= step;       
         } else if (event.keyCode === 40 && !isSeat) {
             topPos += step;
-            block.style.top = topPos + "px";
         } else {
             isMove = false;
         }
-        if (event.keyCode !== 32) isMoveChange();
+
+        if (event.keyCode !== 32) {
+            seatBlock.style.left = block.style.left = leftPos + "px";
+            seatBlock.style.top  = block.style.top = topPos + "px";
+            isMoveChange();
+        }
     }
 
     function isMoveChange() {
