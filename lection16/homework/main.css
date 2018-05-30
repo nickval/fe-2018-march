@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.square {
+    position: fixed;
+    height: 100px;
+    width: 100px;
+    top: 200px;
+    left: 300px;
+    transition: .1s;
+    background: darkgreen;
+}
+
+.seatSquare {
+    position: fixed;
+    height: 0px;
+    width: 100px;
+    top: 200px;
+    left: 300px;
+    transition: .1s;
+    background: white;   
+}
+
+.menu {
+    position: fixed;
+    height: 0px;
+    width: 100px;
+    top: 0px;
+    left: 0px;
+    transition: .1s;
+    background: white;
+    border: 2px, medium, black;
+}
+
+.menu-item {
+    position: relative;
+    height: 15px;
+    width: 100px;
+    background: white;
+    border: 2px, medium, black;
+}
