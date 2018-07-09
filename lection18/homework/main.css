@@ -1,0 +1,38 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    display: flex;    
+    justify-content: space-around;
+}
+.goods, .cart {
+    display: flex;
+    min-width: 240px;
+    padding: 16px;
+    justify-content: flex-start;
+    flex-direction: column;
+
+}
+.goods {
+    background-color: rgba(129, 129, 129, 0.333);
+}
+
+.cart {
+    background-color: rgba(238, 238, 238, 0.61);
+}
+
+.goodsList {
+    margin-left: 32px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    margin: 4px 0;
+}
+
+.button {
+
+}
