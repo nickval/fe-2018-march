@@ -1,5 +1,4 @@
-let data = [
-    {
+let data = [{
         "id": 1,
         "name": "door",
         "price": 99
@@ -25,6 +24,9 @@ let data = [
         "price": 999
     }
 ];
+let cartData = [];
+console.log(cartData);
+console.log(data);
 
 window.onload = function () {
     let goodsList = document.querySelector(".goodsList"),
@@ -46,13 +48,33 @@ window.onload = function () {
 
     goodsList.append(...tempList);
     goodsList.addEventListener("click", addToCart);
-    
+
     function addToCart(event) {
         let isBtn = event.target.hasAttribute("data-btn"),
             value = Number(event.target.getAttribute("data-btn"));
-            console.log('value ', value);
+        console.log('value ', value);
 
         if (!isBtn) return;
+        // cartData[0] = data[value - 1];
+        // console.log("data = ", data[value - 1]);
+
+        // console.log("cart = ", cartData);
+        if (cartData.length > 0) {
+            cartData.forEach((item) => {
+                if (item.id == value) {
+                    item.amount++;
+                } else {
+                    cartData.push(data[value - 1]);
+                }
+            });
+
+        } else {
+            cartData.push(data[value - 1]);
+            cartData[0].amount = 1;
+        }
+
+
+        console.log("cart = ", cartData);
         // console.log(goodsList);
         // debugger;
         // let arrTmpObj = Array(goodsList.querySelectorAll(".item")[value - 1]);
@@ -60,21 +82,23 @@ window.onload = function () {
         // cart.append(...arrTmpObj);
 
         // let tmpObj = Array(goodsList.querySelectorAll(".item")).find((item, idx) => (idx+1) === value);
-        
+
         // tmpObj = arrTmpObj.find((item, idx) => (idx+1) == value);
         // console.log(arrTmpObj);
         // cart.appendChild(goodsList[value]);
         // console.log(event.target.getAttribute("data-btn"));
 
-        let arrTmpObj = [].slice.call(goodsList.querySelectorAll(".item"));
+        // ---- PASHA -----
+        //     let arrTmpObj = [].slice.call(goodsList.querySelectorAll(".item"));
 
-        const listItem = arrTmpObj.find((item, idx) => (idx+1) === value );
+        //     const listItem = arrTmpObj.find((item, idx) => (idx+1) === value );
 
-        console.log(listItem);
+        //     console.log(listItem);
 
-        const cartList = document.createElement('li');
-        cartList.classList.add('cartListItem');
-        cartList.innerText = `${data[value-1]}`;
-        cart.appendChild(cartList);
-    }; 
+        //     const cartList = document.createElement('li');
+        //     cartList.classList.add('cartListItem');
+
+        //     cartList.innerText = `${data[value-1]}`;
+        //     cart.appendChild(cartList);
+    };
 }
