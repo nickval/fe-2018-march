@@ -40,6 +40,7 @@ window.onload = function () {
         button.classList.add("button");
         button.setAttribute(`data-btn`, item.id);
         itemList.classList.add("item");
+        itemList.setAttribute(`data-item`, 'item' + item.id);
         itemList.innerText = `id: ${item.id}, name: ${item.name}`;
         button.textContent = "Buy";
         itemList.appendChild(button);
@@ -73,8 +74,24 @@ window.onload = function () {
             cartData[0].amount = 1;
         }
 
-
         console.log("cart = ", cartData);
+        tempList.length = 0;
+
+        cartData.forEach((item) => {
+            let itemList = document.createElement("li"),
+                button = document.createElement("button");
+    
+            button.classList.add("button");
+            button.setAttribute(`data-btn`, item.id);
+            itemList.classList.add("item");
+            itemList.innerText = `id: ${item.id}, name: ${item.name}`;
+            button.textContent = "Remove";
+            itemList.appendChild(button);
+            tempList.push(itemList);
+        });
+        cart.appendChild(...tempList);
+        console.log(goodsList.getElementById('item1'));
+        // cart.addEventListener("click", );
         // console.log(goodsList);
         // debugger;
         // let arrTmpObj = Array(goodsList.querySelectorAll(".item")[value - 1]);
