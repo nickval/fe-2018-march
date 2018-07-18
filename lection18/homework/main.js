@@ -33,77 +33,65 @@ window.onload = function () {
         tempList = [],
         cart = document.querySelector(".cart");
 
+// creating Goods List
+
     data.forEach((item) => {
-        let itemList = document.createElement("li"),
+        let itemLi = document.createElement("li"),
             button = document.createElement("button");
 
         button.classList.add("button");
         button.setAttribute(`data-btn`, item.id);
-        itemList.classList.add("item");
-        itemList.setAttribute(`data-item`, 'item' + item.id);
-        itemList.innerText = `id: ${item.id}, name: ${item.name}`;
+        itemLi.classList.add("item");
+        itemLi.setAttribute(`data-item`, 'item' + item.id);
+        itemLi.innerText = `id: ${item.id}, name: ${item.name}`;
         button.textContent = "Buy";
-        itemList.appendChild(button);
-        tempList.push(itemList);
+        itemLi.appendChild(button);
+        tempList.push(itemLi);
     });
 
     goodsList.append(...tempList);
     goodsList.addEventListener("click", addToCart);
+    cart.addEventListener("click", removeFromCart);
 
     function addToCart(event) {
         let isBtn = event.target.hasAttribute("data-btn"),
-            value = Number(event.target.getAttribute("data-btn"));
-        console.log('value ', value);
+            btnItemID = Number(event.target.getAttribute("data-btn"));
+        // console.log('value ', value);
 
         if (!isBtn) return;
-        // cartData[0] = data[value - 1];
-        // console.log("data = ", data[value - 1]);
 
-        // console.log("cart = ", cartData);
         if (cartData.length > 0) {
             cartData.forEach((item) => {
-                if (item.id == value) {
+                if (item.id == btnItemID) {
                     item.amount++;
-                } else {
-                    cartData.push(data[value - 1]);
                 }
             });
-
         } else {
-            cartData.push(data[value - 1]);
+            cartData.push(data[btnItemID - 1]);
             cartData[0].amount = 1;
         }
 
-        console.log("cart = ", cartData);
+        if(!cartData.find((item) => isNotExist = (item.id == data[btnItemID -1].id) ? true : false)) {
+            cartData.push(data[btnItemID - 1]);
+            cartData[cartData.length -1].amount = 1;
+        };
+
         tempList.length = 0;
 
         cartData.forEach((item) => {
-            let itemList = document.createElement("li"),
+            let itemLi = document.createElement("li"),
                 button = document.createElement("button");
     
             button.classList.add("button");
-            button.setAttribute(`data-btn`, item.id);
-            itemList.classList.add("item");
-            itemList.innerText = `id: ${item.id}, name: ${item.name}`;
+            button.setAttribute(`data-btn-remove`, item.id);
+            itemLi.classList.add("item");
+            itemLi.innerText = `id: ${item.id}, name: ${item.name}, amount: ${item.amount}`;
             button.textContent = "Remove";
-            itemList.appendChild(button);
-            tempList.push(itemList);
+            itemLi.appendChild(button);
+            tempList.push(itemLi);
         });
-        cart.appendChild(...tempList);
-        console.log(goodsList.getElementById('item1'));
-        // cart.addEventListener("click", );
-        // console.log(goodsList);
-        // debugger;
-        // let arrTmpObj = Array(goodsList.querySelectorAll(".item")[value - 1]);
-
-        // cart.append(...arrTmpObj);
-
-        // let tmpObj = Array(goodsList.querySelectorAll(".item")).find((item, idx) => (idx+1) === value);
-
-        // tmpObj = arrTmpObj.find((item, idx) => (idx+1) == value);
-        // console.log(arrTmpObj);
-        // cart.appendChild(goodsList[value]);
-        // console.log(event.target.getAttribute("data-btn"));
+        cart.innerHTML = "<h3>Cart:</h3>";
+        cart.append(...tempList);
 
         // ---- PASHA -----
         //     let arrTmpObj = [].slice.call(goodsList.querySelectorAll(".item"));
@@ -117,5 +105,43 @@ window.onload = function () {
 
         //     cartList.innerText = `${data[value-1]}`;
         //     cart.appendChild(cartList);
+    };
+
+    function removeFromCart(event) {
+        let isBtn = event.target.hasAttribute("data-btn-remove"),
+            btnItemID = Number(event.target.getAttribute("data-btn-remove"));
+        // console.log('value ', value);
+
+        if (!isBtn) return;
+
+        if (cartData.find((item, idx) => {
+            if (item.id == btnItemID && item.amount > 1) {
+                item.amount--;
+            } else if (item.id == btnItemID && item.amount == 1) {
+                cartData.splice(idx, 1);
+                console.log("removedEl: ", idx);
+            }
+
+        })){
+
+        }
+
+        tempList.length = 0;
+
+        cartData.forEach((item) => {
+            let itemLi = document.createElement("li"),
+                button = document.createElement("button");
+    
+            button.classList.add("button");
+            button.setAttribute(`data-btn-remove`, item.id);
+            itemLi.classList.add("item");
+            itemLi.innerText = `id: ${item.id}, name: ${item.name}, amount: ${item.amount}`;
+            button.textContent = "Remove";
+            itemLi.appendChild(button);
+            tempList.push(itemLi);
+        });
+        cart.innerHTML = "<h3>Cart:</h3>";
+        cart.append(...tempList);
+
     };
 }
