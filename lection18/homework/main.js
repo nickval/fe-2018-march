@@ -114,17 +114,16 @@ window.onload = function () {
 
         if (!isBtn) return;
 
-        if (cartData.find((item, idx) => {
-            if (item.id == btnItemID && item.amount > 1) {
-                item.amount--;
-            } else if (item.id == btnItemID && item.amount == 1) {
-                cartData.splice(idx, 1);
-                console.log("removedEl: ", idx);
+        cartData.forEach((item, idx) => {
+            if (item.id === btnItemID) {
+                if (item.amount ===1) {
+                    cartData.splice(idx, 1);
+                    console.log("removedEl: ", idx);
+                } else {
+                    item.amount--;
+                }
             }
-
-        })){
-
-        }
+        });
 
         tempList.length = 0;
 
